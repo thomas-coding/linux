@@ -1,0 +1,5 @@
+config STUDY
+	bool "thomas test device"
+	default n
+	help
+	  Study dir for linux driver study

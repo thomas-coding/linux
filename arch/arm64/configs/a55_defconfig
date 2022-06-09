@@ -22,9 +22,12 @@ CONFIG_SERIAL_DEV_BUS=y
 CONFIG_DEVTMPFS=y
 CONFIG_BLK_DEV_INITRD=y
 # initramfs use hello or actual rootfs
-#CONFIG_INITRAMFS_SOURCE="samples/ramfs/image"
-CONFIG_INITRAMFS_SOURCE="../out/images/rootfs.cpio"
+CONFIG_INITRAMFS_SOURCE="samples/ramfs/image"
+#CONFIG_INITRAMFS_SOURCE="../out/images/rootfs.cpio"
 
 # optee
 CONFIG_TEE=y
 CONFIG_OPTEE=y
+
+# add driver for study
+CONFIG_STUDY=y
