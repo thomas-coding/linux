@@ -10,6 +10,9 @@
 /dts-v1/;
 
 / {
+
+	model = "Thomas A55 RevA";
+	compatible = "thomas,a55";
 	#address-cells = <1>;
 	#size-cells = <1>;
 
