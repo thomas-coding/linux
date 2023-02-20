@@ -18,6 +18,9 @@ CONFIG_SERIAL_8250_DW=y
 CONFIG_SERIAL_OF_PLATFORM=y
 CONFIG_SERIAL_DEV_BUS=y
 
-# hello initramfs
+# initramfs
+CONFIG_DEVTMPFS=y
 CONFIG_BLK_DEV_INITRD=y
-CONFIG_INITRAMFS_SOURCE="samples/ramfs/image"
+# initramfs use hello or actual rootfs
+#CONFIG_INITRAMFS_SOURCE="samples/ramfs/image"
+CONFIG_INITRAMFS_SOURCE="../buildroot/output/images/rootfs.cpio"
