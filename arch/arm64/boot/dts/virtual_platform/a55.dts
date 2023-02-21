@@ -79,4 +79,12 @@
 		clocks = <&dummy_apb>;
 	};
 
+	firmware {
+		optee: optee {
+			compatible = "linaro,optee-tz";
+			method = "smc";
+			status = "okay";
+		};
+	};
+
 };
