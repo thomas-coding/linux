@@ -2,6 +2,7 @@
 #
 # Makefile for the linux kernel.
 #
+CFLAGS_mte.o += -O
 
 CFLAGS_armv8_deprecated.o := -I$(src)
 

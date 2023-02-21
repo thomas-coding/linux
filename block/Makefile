@@ -3,6 +3,13 @@
 # Makefile for the kernel block layer
 #
 
+
+CFLAGS_bio.o += -O
+CFLAGS_blk-core.o += -O
+CFLAGS_blk-map.o += -O
+CFLAGS_blk-merge.o += -O
+CFLAGS_blk-mq.o += -O
+
 obj-y		:= bdev.o fops.o bio.o elevator.o blk-core.o blk-sysfs.o \
 			blk-flush.o blk-settings.o blk-ioc.o blk-map.o \
 			blk-merge.o blk-timeout.o \

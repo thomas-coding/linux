@@ -5,6 +5,8 @@
 # 14 Sep 2000, Christoph Hellwig <hch@infradead.org>
 # Rewritten to use lists instead of if-statements.
 # 
+CFLAGS_splice.o += -O
+CFLAGS_mpage.o += -O
 
 obj-$(CONFIG_SYSCTL)		+= sysctls.o
 

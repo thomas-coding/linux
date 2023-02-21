@@ -3,6 +3,9 @@
 # Makefile for the Linux proc filesystem routines.
 #
 
+
+CFLAGS_task_mmu.o += -O
+
 obj-y   += proc.o
 
 CFLAGS_task_mmu.o	+= $(call cc-option,-Wno-override-init,)
