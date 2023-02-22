@@ -286,8 +286,6 @@ struct ftrace_likely_data {
 
 #ifndef asm_volatile_goto
 #define asm_volatile_goto(x...) asm goto(x)
-// for O0
-//#define asm_volatile_goto(x...) do {} while (0)
 #endif
 
 #ifdef CONFIG_CC_HAS_ASM_INLINE

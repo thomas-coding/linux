@@ -1,8 +1,4 @@
 # SPDX-License-Identifier: GPL-2.0
-
-CFLAGS_iommu.o += -O
-CFLAGS_dma-iommu.o += -O
-
 obj-y += amd/ intel/ arm/
 obj-$(CONFIG_IOMMU_API) += iommu.o
 obj-$(CONFIG_IOMMU_API) += iommu-traces.o

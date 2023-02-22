@@ -3,39 +3,6 @@
 # Makefile for the linux memory manager.
 #
 
-CFLAGS_filemap.o += -O
-CFLAGS_page-writeback.o += -O
-CFLAGS_readahead.o += -O
-CFLAGS_swap.o += -O
-CFLAGS_vmscan.o += -O
-CFLAGS_shmem.o += -O
-CFLAGS_util.o += -O
-CFLAGS_vmstat.o += -O
-CFLAGS_compaction.o += -O
-CFLAGS_workingset.o += -O
-CFLAGS_gup.o += -O
-CFLAGS_memory.o += -O
-CFLAGS_mlock.o += -O
-CFLAGS_mincore.o += -O
-CFLAGS_mmap.o += -O
-CFLAGS_mprotect.o += -O
-CFLAGS_mremap.o += -O
-CFLAGS_mmu_gather.o += -O
-CFLAGS_rmap.o += -O
-CFLAGS_page_vma_mapped.o += -O
-CFLAGS_pgtable-generic.o += -O
-CFLAGS_swapfile.o += -O
-CFLAGS_page_alloc.o += -O
-CFLAGS_madvise.o += -O
-CFLAGS_swap_state.o += -O
-CFLAGS_page_io.o += -O
-CFLAGS_migrate.o += -O
-CFLAGS_sparse.o += -O
-CFLAGS_truncate.o += -O
-CFLAGS_vmalloc.o += -O
-CFLAGS_debug.o += -O
-
-
 KASAN_SANITIZE_slab_common.o := n
 KASAN_SANITIZE_slab.o := n
 KASAN_SANITIZE_slub.o := n

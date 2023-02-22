@@ -1911,12 +1911,10 @@ static void check_exports(struct module *mod)
 		const char *basename;
 		exp = find_symbol(s->name);
 		if (!exp) {
-			#if 0//for O0
 			if (!s->weak && nr_unresolved++ < MAX_UNRESOLVED_REPORTS)
 				modpost_log(warn_unresolved ? LOG_WARN : LOG_ERROR,
 					    "\"%s\" [%s.ko] undefined!\n",
 					    s->name, mod->name);
-			#endif
 			continue;
 		}
 		if (exp->module == mod) {
@@ -2397,9 +2395,7 @@ int main(int argc, char **argv)
 
 	if (dump_write)
 		write_dump(dump_write);
-	// for O0
-	//if (sec_mismatch_count && !sec_mismatch_warn_only)
-	if (0 && sec_mismatch_count && !sec_mismatch_warn_only)
+	if (sec_mismatch_count && !sec_mismatch_warn_only)
 		error("Section mismatches detected.\n"
 		      "Set CONFIG_SECTION_MISMATCH_WARN_ONLY=y to allow them.\n");
 
