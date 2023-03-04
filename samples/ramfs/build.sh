@@ -19,4 +19,7 @@ sudo mknod -m 660 image/dev/console c 5 1
 # create init
 aarch64-none-linux-gnu-gcc -g -static -o image/init hello.c
 
+
+aarch64-none-linux-gnu-objdump -xd image/init >image/init.asm
+
 #echo hello | cpio -o --format=newc > initramfs
