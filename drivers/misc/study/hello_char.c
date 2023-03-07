@@ -25,6 +25,9 @@ struct hello_char_device {
 };
 static struct hello_char_device hello_dev;
 
+
+static struct class *hello_class;
+
 static int hello_char_open(struct inode *inode, struct file *file)
 {
 	struct hello_char_device *dev;
@@ -37,7 +40,7 @@ static int hello_char_open(struct inode *inode, struct file *file)
 
 	//memset(dev->hello_char_buffer, 0, HELLO_CHAR_BUFFER_SIZE);
 
-	//pr_err("hello char open ..\n");
+	pr_err("hello char open ..\n");
 	//pr_err("file short name:%s\n", file->f_path.dentry->d_iname);
 	//pr_err("inode dev_t %d:%d\n", MAJOR(inode->i_rdev), MINOR(inode->i_rdev));
 	return 0;
@@ -64,7 +67,7 @@ ssize_t hello_char_read(struct file *file, char __user *buf, size_t size,
 	int retval = 0;
 	unsigned long hello_data_size = sizeof(dev->hello_char_buffer);
 
-	//pr_err("hello char read ..\n");
+	pr_err("hello char read ..\n");
 	if (p >= hello_data_size) {
 		//pr_err("sorry, we do not have more data\n");
 		return 0;
@@ -116,7 +119,7 @@ ssize_t hello_char_write(struct file *file, const char __user *buf, size_t size,
 	/* Update position and return value, tell user how much we write */
 	*ppos += count;
 	retval = count;
-	//pr_err("written %u bytes(s) from %lu\n", count, p);
+	pr_err("written %u bytes(s) from %lu\n", count, p);
 
 	return retval;
 }
@@ -133,6 +136,7 @@ static const struct file_operations hello_char_fops = {
 static int __init hello_char_init(void)
 {
 	int retval;
+	struct device *dev;
 
 	/* Init cdev , init kobject(cdev.kobj) and put ops to cdev */
 	/* only do struct init, and link to system */
@@ -162,8 +166,26 @@ static int __init hello_char_init(void)
 
 	/* Init buffer */
 	memset(hello_dev.hello_char_buffer, 0, HELLO_CHAR_BUFFER_SIZE);
+
+	/* Create class */
+	hello_class = class_create(THIS_MODULE, "hello_char_class");
+	if (IS_ERR(hello_class)) {
+		retval = PTR_ERR(hello_class);
+		goto cleanup_alloc_chrdev_region;
+	}
+
+	/* Create dev */
+	dev = device_create(hello_class, NULL, hello_dev.devno, NULL, "hello_char");
+	if (IS_ERR(dev)) {
+		pr_err("Could not create files\n");
+		retval = PTR_ERR(hello_class);
+		goto cleanup_all;
+	}
+
 	return 0;
 
+cleanup_all:
+	class_destroy(hello_class);
 cleanup_alloc_chrdev_region:
 	unregister_chrdev_region(hello_dev.devno, 1);
 error:
@@ -177,6 +199,8 @@ static void __exit hello_char_exit(void)
 
 	/* Free cdev, actually free probe and delete cdev from system */
 	cdev_del(&hello_dev.cdev);
+
+	class_destroy(hello_class);
 }
 
 module_init(hello_char_init);
