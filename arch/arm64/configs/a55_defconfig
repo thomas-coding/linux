@@ -36,3 +36,6 @@ CONFIG_OPTEE=y
 
 # add driver for study
 CONFIG_STUDY=y
+
+# enable debug fs
+CONFIG_DEBUG_FS=y

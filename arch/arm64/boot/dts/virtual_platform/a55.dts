@@ -79,6 +79,13 @@
 		clocks = <&dummy_apb>;
 	};
 
+	qemu_test_device: test_device@50000000 {
+		compatible = "virtual-platform,test-device";
+		reg = <0x50000000 0x1000>;
+		interrupt-parent = <&gic>;
+		interrupts = <GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>;
+	};
+
 	firmware {
 		optee: optee {
 			compatible = "linaro,optee-tz";
