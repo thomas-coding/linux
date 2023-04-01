@@ -21,7 +21,7 @@
 	};
 
 	chosen {
-		bootargs = "earlycon";
+		bootargs = "earlycon rootwait root=/dev/mmcblk0p2 rw rootfstype=ext4";
 		stdout-path = "serial0:115200n8";
 	};
 
@@ -105,6 +105,20 @@
 	psci {
 		compatible = "arm,psci-1.0";
 		method = "smc";
+	};
+
+	sd: sdhci@70000000 {
+		compatible = "snps,dwcmshc-sdhci";
+		reg = <0x70000000 0x10000>;
+		interrupt-parent = <&gic>;
+		interrupts = <GIC_SPI 102 IRQ_TYPE_LEVEL_HIGH>;
+		max-frequency = <4000000>;
+		bus-width = <4>;
+		clocks = <&dummy_apb>;
+		clock-names = "core";
+		no-1-8-v;
+		no-sdio;
+		status = "okay";
 	};
 
 };
