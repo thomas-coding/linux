@@ -13,8 +13,8 @@
 
 	model = "Thomas A55 RevA";
 	compatible = "thomas,a55";
-	#address-cells = <1>;
-	#size-cells = <1>;
+	#address-cells = <2>;
+	#size-cells = <2>;
 
 	aliases {
 		serial0 = &uart0;
@@ -55,7 +55,7 @@
 
 	memory@31000000 {
 		device_type = "memory";
-		reg = <0x31000000 0x0f000000>;
+		reg = <0x0 0x31000000 0x0 0x0f000000>;
 	};
 
 	gic: interrupt-controller@60000000 {
@@ -64,8 +64,8 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 		interrupt-controller;
-		reg = <0x60000000 0x00010000>,	// GICD
-		      <0x61000000 0x00F60000>;	// GICR
+		reg = <0x0 0x60000000 0x0 0x00010000>,	// GICD
+		      <0x0 0x61000000 0x0 0x00F60000>;	// GICR
 	};
 
 	arm-timer {
@@ -80,7 +80,7 @@
 
 	uart0: serial@40000000 {
 		compatible = "ns16550a";
-		reg = <0x40000000 0x1000>;
+		reg = <0x0 0x40000000 0x0 0x1000>;
 		interrupt-parent = <&gic>;
 		interrupts = <GIC_SPI 101 IRQ_TYPE_LEVEL_HIGH>;
 		reg-shift = <2>;
@@ -89,7 +89,7 @@
 
 	qemu_test_device: test_device@50000000 {
 		compatible = "virtual-platform,test-device";
-		reg = <0x50000000 0x1000>;
+		reg = <0x0 0x50000000 0x0 0x1000>;
 		interrupt-parent = <&gic>;
 		interrupts = <GIC_SPI 100 IRQ_TYPE_LEVEL_HIGH>;
 	};
@@ -109,7 +109,7 @@
 
 	sd: sdhci@70000000 {
 		compatible = "snps,dwcmshc-sdhci";
-		reg = <0x70000000 0x10000>;
+		reg = <0x0 0x70000000 0x0 0x10000>;
 		interrupt-parent = <&gic>;
 		interrupts = <GIC_SPI 102 IRQ_TYPE_LEVEL_HIGH>;
 		max-frequency = <4000000>;
