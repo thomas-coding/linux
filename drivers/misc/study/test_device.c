@@ -112,6 +112,10 @@ static ssize_t test_device_write(struct file *filp, const char __user *buf,
 		test_trigger(test);
 	else if (!strncmp(cmd, "dump", 4))
 		test_dump(test);
+	else if (!strncmp(cmd, "bug_on", 6))
+		BUG_ON("test device bug");
+	else if (!strncmp(cmd, "panic", 5))
+		panic("test device panic");
 	else
 		dev_info(&pdev->dev, "unknown cmd\n");
 

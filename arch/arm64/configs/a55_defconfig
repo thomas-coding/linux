@@ -62,3 +62,16 @@ CONFIG_MMC_SDHCI_OF_DWCMSHC=y
 
 # enable print time
 CONFIG_PRINTK_TIME=y
+
+# enable magic system request key
+CONFIG_MAGIC_SYSRQ=y
+
+# enable pstore
+CONFIG_PSTORE=y
+CONFIG_PSTORE_PMSG=y
+CONFIG_PSTORE_FTRACE=y
+CONFIG_PSTORE_CONSOLE=y
+#CONFIG_PSTORE_RAM=y
+# modprobe pstore_blk.ko blkdev=/dev/mmcblk0p3 compress=off
+# mount -t pstore pstore /sys/fs/pstore
+CONFIG_PSTORE_BLK=y

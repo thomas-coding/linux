@@ -21,7 +21,8 @@
 	};
 
 	chosen {
-		bootargs = "earlycon rootwait root=/dev/mmcblk0p2 rw rootfstype=ext4";
+		bootargs = "earlycon rootwait root=/dev/mmcblk0p2 rw rootfstype=ext4 \
+			pstore.backend=pstore_blk pstore_blk.blkdev=/dev/mmcblk0p3 pstore_blk.kmsg_size=64 pstore_blk.best_effort=y";
 		stdout-path = "serial0:115200n8";
 	};
 
@@ -120,5 +121,21 @@
 		no-sdio;
 		status = "okay";
 	};
+
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		ramoops@21f00000 {
+			compatible = "ramoops";
+			reg = <0x0 0x3b000000 0x0 0x00100000>;
+			record-size     = <0x00020000>;
+			console-size    = <0x00020000>;
+			ftrace-size     = <0x00020000>;
+		};
+	};
+
+
 
 };

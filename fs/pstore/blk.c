@@ -254,6 +254,8 @@ EXPORT_SYMBOL_GPL(pstore_blk_get_config);
 
 
 #ifndef MODULE
+#include <linux/delay.h>
+#include <linux/async.h>
 static const char devname[] = "/dev/pstore-blk";
 static __init const char *early_boot_devpath(const char *initial_devname)
 {
@@ -264,6 +266,15 @@ static __init const char *early_boot_devpath(const char *initial_devname)
 	 * the root file system.
 	 */
 	dev_t dev = name_to_dev_t(initial_devname);
+
+	/* wait for any asynchronous scanning(mmc_rescan) to complete */
+	if (dev == 0) {
+		printk(KERN_INFO "Waiting for blk device\n");
+		while (driver_probe_done() != 0 ||
+			(dev = name_to_dev_t(initial_devname)) == 0)
+			msleep(5);
+		async_synchronize_full();
+	}
 
 	if (!dev) {
 		pr_err("failed to resolve '%s'!\n", initial_devname);
