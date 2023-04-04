@@ -15,6 +15,9 @@ mkdir -p ${current_folder}/out
 
 # create binary
 aarch64-none-linux-gnu-gcc -g -static -o out/hello hello/hello.c
+aarch64-none-linux-gnu-gcc -g -o out/ctest crypto/ctest.c \
+    crypto/crypto_data.c crypto/crypto_util.c \
+    crypto/crypto_hash_test.c
 
 # dump asm
 #aarch64-none-linux-gnu-objdump -xd hello/hello >hello/hello.asm

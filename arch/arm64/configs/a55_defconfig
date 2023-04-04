@@ -75,3 +75,14 @@ CONFIG_PSTORE_CONSOLE=y
 # modprobe pstore_blk.ko blkdev=/dev/mmcblk0p3 compress=off
 # mount -t pstore pstore /sys/fs/pstore
 CONFIG_PSTORE_BLK=y
+
+# crypto
+CONFIG_CRYPTO=y
+CONFIG_CRYPTO_USER=y
+CONFIG_CRYPTO_SHA1=y
+CONFIG_CRYPTO_SHA256=y
+CONFIG_CRYPTO_SHA512=y
+CONFIG_CRYPTO_USER_API_HASH=y
+
+# net for support socket
+CONFIG_NET=y
