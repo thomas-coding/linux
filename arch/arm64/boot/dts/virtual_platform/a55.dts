@@ -21,8 +21,8 @@
 	};
 
 	chosen {
-		bootargs = "earlycon rootwait root=/dev/mmcblk0p2 rw rootfstype=ext4 \
-			pstore.backend=pstore_blk pstore_blk.blkdev=/dev/mmcblk0p3 pstore_blk.kmsg_size=64 pstore_blk.best_effort=y";
+		bootargs = "earlycon rootwait root=/dev/mmcblk0p2 rw rootfstype=ext4 crashkernel=0x02000000@0x36000000"; /*\
+			pstore.backend=pstore_blk pstore_blk.blkdev=/dev/mmcblk0p3 pstore_blk.kmsg_size=64 pstore_blk.best_effort=y";*/
 		stdout-path = "serial0:115200n8";
 	};
 

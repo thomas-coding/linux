@@ -18,6 +18,7 @@ aarch64-none-linux-gnu-gcc -g -static -o out/hello hello/hello.c
 aarch64-none-linux-gnu-gcc -g -o out/ctest crypto/ctest.c \
     crypto/crypto_data.c crypto/crypto_util.c \
     crypto/crypto_hash_test.c
+aarch64-none-linux-gnu-gcc -g -static -o out/block_device block_device/block_device.c
 
 # dump asm
 #aarch64-none-linux-gnu-objdump -xd hello/hello >hello/hello.asm
