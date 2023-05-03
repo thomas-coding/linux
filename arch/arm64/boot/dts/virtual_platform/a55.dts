@@ -136,6 +136,17 @@
 		};
 	};
 
+	ethernet: ethernet@80000000 {
+		compatible = "smsc,lan9118", "smsc,lan9115";
+		reg = <0x0 0x80000000 0x0 0x10000>;
+		phy-mode = "mii";
+		reg-io-width = <4>;
+		interrupt-parent = <&gic>;
+		interrupts = <GIC_SPI 103 IRQ_TYPE_LEVEL_HIGH>;
+		smsc,irq-active-high;
+		smsc,irq-push-pull;
+	};
+
 
 
 };
