@@ -12,10 +12,10 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#define BLOCK_DEVICE "/dev/mmcblk0p3"
+#define BLOCK_DEVICE "/dev/hello_block"
 
 /*
- * xxd -s 0 -l 100 /dev/mmcblk0p3
+ * xxd -s 0 -l 100 /dev/hello_block
  * 00000000: 4865 6c6c 6f20 576f 726c 6421 0000 0000  Hello World!....
  */
 int block_device_test(void) {
@@ -72,7 +72,7 @@ int block_device_test(void) {
 
 void main()
 {
-    printf("block device test\n");
+    printf("block device test for %s\n", BLOCK_DEVICE);
     block_device_test();
 }
 

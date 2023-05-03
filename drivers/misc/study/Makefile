@@ -2,3 +2,4 @@
 obj-$(CONFIG_STUDY) += hello.o
 obj-$(CONFIG_STUDY) += hello_char.o
 obj-$(CONFIG_STUDY) += test_device.o
+obj-$(CONFIG_STUDY) += hello_block.o
