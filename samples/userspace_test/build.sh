@@ -25,6 +25,8 @@ aarch64-none-linux-gnu-gcc -g -static -o out/udp_client net/udp_client.c
 aarch64-none-linux-gnu-gcc -g -static -o out/tcp_server net/tcp_server.c
 aarch64-none-linux-gnu-gcc -g -static -o out/tcp_client net/tcp_client.c
 
+aarch64-none-linux-gnu-gcc -g -static -o out/ucontext ucontext/ucontext.c
+
 # dump asm
 #aarch64-none-linux-gnu-objdump -xd hello/hello >hello/hello.asm
 
