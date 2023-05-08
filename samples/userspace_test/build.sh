@@ -26,7 +26,9 @@ aarch64-none-linux-gnu-gcc -g -static -o out/tcp_server net/tcp_server.c
 aarch64-none-linux-gnu-gcc -g -static -o out/tcp_client net/tcp_client.c
 
 aarch64-none-linux-gnu-gcc -g -static -o out/ucontext ucontext/ucontext.c
+aarch64-none-linux-gnu-gcc -g -static -o out/debuggee ptrace/debuggee.c
+aarch64-none-linux-gnu-gcc -g -static -o out/debugger ptrace/debugger.c
 
 # dump asm
-#aarch64-none-linux-gnu-objdump -xd hello/hello >hello/hello.asm
+aarch64-none-linux-gnu-objdump -xd out/debuggee > out/debuggee.asm
 
