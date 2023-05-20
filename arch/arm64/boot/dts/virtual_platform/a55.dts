@@ -135,7 +135,7 @@
 			ftrace-size     = <0x00020000>;
 		};
 	};
-
+/*
 	ethernet: ethernet@80000000 {
 		compatible = "smsc,lan9118", "smsc,lan9115";
 		reg = <0x0 0x80000000 0x0 0x10000>;
@@ -146,7 +146,7 @@
 		smsc,irq-active-high;
 		smsc,irq-push-pull;
 	};
-
+*/
 	virtio_mmio0:virtio_mmio@90000000 {
 		interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
 		interrupt-parent = <&gic>;
