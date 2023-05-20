@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: MIT
+/*
+ * Copyright (c) 2021-2031, Jinping Wu (wunekky@gmail.com). All rights reserved.
+ *
+ */
 /* Ref: https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/ */
 
 #include <stdio.h>
@@ -43,20 +48,28 @@ void func(int connfd)
 }
 
 // Driver function
-int main()
+int main(void)
 {
 	int sockfd, connfd, len;
 	struct sockaddr_in servaddr, cli;
+	const int one = 1;
+	int err = -1;
 
 	// socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1) {
 		printf("socket creation failed...\n");
 		exit(0);
-	}
-	else
+	} else
 		printf("Socket successfully created..\n");
 	bzero(&servaddr, sizeof(servaddr));
+
+	err = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &one,
+				sizeof(one));
+	if (err) {
+		printf("failed to enable SO_REUSEADDR");
+		exit(0);
+	}
 
 	// assign IP, PORT
 	servaddr.sin_family = AF_INET;
@@ -64,29 +77,26 @@ int main()
 	servaddr.sin_port = htons(PORT);
 
 	// Binding newly created socket to given IP and verification
-	if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) {
+	if ((bind(sockfd, (SA *)&servaddr, sizeof(servaddr))) != 0) {
 		printf("socket bind failed...\n");
 		exit(0);
-	}
-	else
+	} else
 		printf("Socket successfully binded..\n");
 
 	// Now server is ready to listen and verification
 	if ((listen(sockfd, 5)) != 0) {
 		printf("Listen failed...\n");
 		exit(0);
-	}
-	else
+	} else
 		printf("Server listening..\n");
 	len = sizeof(cli);
 
 	// Accept the data packet from client and verification
-	connfd = accept(sockfd, (SA*)&cli, &len);
+	connfd = accept(sockfd, (SA *)&cli, &len);
 	if (connfd < 0) {
 		printf("server accept failed...\n");
 		exit(0);
-	}
-	else
+	} else
 		printf("server accept the client...\n");
 
 	// Function for chatting between client and server
