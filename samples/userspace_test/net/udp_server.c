@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
   
-#define PORT    8080
+#define PORT    22//8080
 #define MAXLINE 1024
   
 // Driver code
@@ -31,7 +31,7 @@ int main() {
       
     // Filling server information
     servaddr.sin_family    = AF_INET; // IPv4
-    servaddr.sin_addr.s_addr = INADDR_ANY;
+    servaddr.sin_addr.s_addr = htonl(0xc0a81f64);//INADDR_ANY;
     servaddr.sin_port = htons(PORT);
       
     // Bind the socket with the server address

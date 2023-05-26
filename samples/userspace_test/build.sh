@@ -33,3 +33,9 @@ aarch64-none-linux-gnu-gcc -g -static -o out/display display/display.c || exit
 
 # dump asm
 aarch64-none-linux-gnu-objdump -xd out/debuggee > out/debuggee.asm
+
+# build host
+rm -rf ${current_folder}/host/out
+mkdir -p ${current_folder}/host/out
+gcc -g -static -o host/out/tcp_server  host/net_test/tcp_server.c  || exit
+gcc -g -static -o host/out/tcp_client  host/net_test/tcp_client.c  || exit
