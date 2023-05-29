@@ -166,7 +166,7 @@
 	virtio_mmio2:virtio_mmio@90002000 {
 		interrupts = <GIC_SPI 82 IRQ_TYPE_LEVEL_HIGH>;
 		interrupt-parent = <&gic>;
-		reg = <0x0 0x90001000 0x0 0x1000>;
+		reg = <0x0 0x90002000 0x0 0x1000>;
 		compatible = "virtio,mmio";
 		status = "okay";
 	};
