@@ -31,6 +31,8 @@ aarch64-none-linux-gnu-gcc -g -static -o out/debugger ptrace/debugger.c || exit
 
 aarch64-none-linux-gnu-gcc -g -static -o out/display display/display.c || exit
 
+aarch64-none-linux-gnu-gcc -g -static -o out/signal signal/signal.c || exit
+
 # dump asm
 aarch64-none-linux-gnu-objdump -xd out/debuggee > out/debuggee.asm
 
