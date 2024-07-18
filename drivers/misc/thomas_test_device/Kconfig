@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config THOMAS_TEST_DEVICE
+	tristate "thomas test device support"
+	help
+	  This driver provides thomas test device for simple interrupt test

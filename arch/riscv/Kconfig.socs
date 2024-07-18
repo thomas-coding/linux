@@ -22,6 +22,11 @@ config SOC_SIFIVE
 	help
 	  This enables support for SiFive SoC platform hardware.
 
+config ARCH_THOMAS_RISCV64
+	bool "Thomas 64-bit Soc Family"
+	help
+	  This enables support for Thomas 64-bit Soc Family
+
 config ARCH_SOPHGO
 	bool "Sophgo SoCs"
 	help

@@ -1,0 +1,140 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * dts for thomas riscv64
+ *
+ * Copyright (C) 2024 Verisilicon Inc.
+ *
+ */
+
+/dts-v1/;
+
+/ {
+	model = "Thomas RISCV64 Board";
+	compatible = "thomas,riscv64";
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	aliases {
+		serial0 = &uart0;
+	};
+
+	chosen {
+		bootargs = "earlycon console=ttyS0,115200 rootwait root=/dev/ram rw rootfstype=ext4 loglevel=8";
+		stdout-path = "serial0:115200n8";
+	};
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		timebase-frequency = <8000000>;
+
+		cpu@0 {
+			device_type = "cpu";
+			reg = <0>;
+			status = "okay";
+			compatible = "riscv";
+			riscv,isa-base = "rv64i";
+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c";
+			mmu-type = "riscv,sv39";
+			clock-frequency = <250000000>;
+			cpu0_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				interrupt-controller;
+				compatible = "riscv,cpu-intc";
+			};
+		};
+
+		cpu@1 {
+			device_type = "cpu";
+			reg = <1>;
+			status = "okay";
+			compatible = "riscv";
+			riscv,isa-base = "rv64i";
+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c";
+			mmu-type = "riscv,sv39";
+			clock-frequency = <250000000>;
+			cpu1_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				interrupt-controller;
+				compatible = "riscv,cpu-intc";
+			};
+		};
+	};
+
+	memory@41000000 {
+			device_type = "memory";
+			reg = <0x00 0x41000000 0x0 0x2F000000>;
+	};
+
+	resmem: reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		reserved: xpu_buffer@0{
+			compatible = "shared-dma-pool";
+			no-map;
+			reg = <0x0 0x70000000 0x0 0x10000000>;
+		};
+	};
+
+	clocks {
+		dummy_apb: apb-clock {
+			compatible = "fixed-clock";
+			clock-frequency = <25000000>;
+			clock-output-names = "dummy_apb";
+			#clock-cells = <0>;
+		};
+	};
+
+	plic0: interrupt-controller@c000000 {
+		#interrupt-cells = <1>;
+		compatible = "riscv,plic0";
+		interrupt-controller;
+		riscv,ndev = <250>;
+		interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>,
+					      <&cpu1_intc 11>, <&cpu1_intc 9>;
+		reg = <0x0 0xc000000 0x0 0x4000000>;
+	};
+
+	clint0: clint@2000000 {
+		compatible = "riscv,clint0";
+		reg = <0x0 0x2000000 0x00 0xc000>;
+		interrupts-extended = <&cpu0_intc 3 &cpu0_intc 7>,
+								<&cpu1_intc 3 &cpu1_intc 7>;
+		clocks = <&dummy_apb>;
+	};
+
+	uart0: serial@10000000 {
+		compatible = "ns16550a";
+		reg = <0 0x10000000 0x0 0x1000>;
+		interrupt-parent = <&plic0>;
+		interrupts = <20>;
+		clocks = <&dummy_apb>;
+		clock-frequency = <25000000>;
+		reg-shift = <2>;
+	};
+
+	qemu_test_device: test_device@50000000 {
+		compatible = "virtual-platform,test-device";
+		reg = <0 0x30000000 0x0 0x1000>;
+		interrupt-parent = <&plic0>;
+		interrupts = <21>;
+	};
+
+/*
+	sdhci0: mmc@400240000 {
+		compatible = "snps,dwcmshc-sdhci";
+		reg = <0x4 0x240000 0x0 0x10000>;
+		interrupt-parent = <&plic0>;
+		interrupts = <119>, <118>;
+		clock-names = "core", "bus";
+		clocks = <&dummy_apb>,<&dummy_apb>;
+		bus-width = <4>;
+		max-frequency = <12000000>;
+		no-1-8-v;
+		status = "okay";
+	};
+*/
+
+};
